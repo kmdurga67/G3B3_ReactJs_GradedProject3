@@ -1,7 +1,5 @@
 # Movie Manager Application
 
-A simple BMI (Body Mass Index) Calculator built with React.js. This application calculates BMI based on user-provided height and weight values.
-
 ## Features
 
 - Able to switch from one tab to another
