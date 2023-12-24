@@ -18,7 +18,7 @@ function App() {
       .then((data) => {
         setSearchResults(data);
       })
-      .catch((error) => toast.error("Error fetching movies:", error));
+      .catch((error) => console.error("Error fetching movies:", error));
   };
 
   const addToFavorites = (movie) => {
@@ -43,10 +43,12 @@ function App() {
           ]);
           toast.success(`Succesfully Added: ${movie.title}`);
         } else {
+          console.error("Error adding movie to favorites:", data.error);
           toast.error(`Error adding to favorites: ${data.error}`);
         }
       })
       .catch((error) => {
+        console.error("Error adding movie to favorites:", error);
         toast.error("Error adding to favorites. Please try again.");
       });
   };
@@ -58,17 +60,19 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          toast.log("Movie removed from favorites:", movieId);
+          console.log("Movie removed from favorites:", movieId);
           setFavoriteMovies((prevFavorites) =>
             prevFavorites.filter((movie) => movie.id !== movieId)
           );
           toast.success("Removed from favorites");
         } else {
-          toast.error("Error removing movie from favorites:", data.error);
+          console.error("Error removing movie from favorites:", data.error);
+          toast.error("Error removing from favorites. Please try again.");
         }
       })
       .catch((error) => {
-        toast.error("Error removing movie from favorites:", error);
+        console.error("Error removing movie from favorites:", error);
+        toast.error("Error removing from favorites. Please try again.");
       });
   };
 
@@ -78,7 +82,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => setFavoriteMovies(data))
       .catch((error) =>
-        toast.error("Error fetching favorite movies:", error)
+        console.error("Error fetching favorite movies:", error)
       );
   }, []);
 
